@@ -1,0 +1,48 @@
+<!--users-->
+<div class="container-xl d-flex flex-wrap pt-5
+    justify-content-xl-around 
+    justify-content-lg-around
+    justify-content-sm-around
+    justify-content-md-around
+    justify-content-center">
+    <div class="card mb-5 border-0" style="width: 18rem;" *ngFor="let item of users">
+        <div class="header p-3">
+            <span class="font-weight-bold text-secondary"> {{item.name}} </span>
+        </div>
+        <div class="img">
+            <img class="card-img-top" src={{item.avatar_url}} alt="Imagem de capa do card">
+        </div>
+        <div class="card-body d-flex align-content-between flex-wrap pt-5">
+            <span class="font-weight-bold text-secondary mb-2"> {{item.location}} </span>
+            <p class="card-text">{{item.bio}}</p>
+            <div class="d-flex justify-content-between">
+                <a href="# " class="card-link ">{{item.followers}} Followers</a>
+                <a href="# " class="card-link ">{{item.public_repos}} Repositórios</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--users-->
+
+<!-- previos and next -->
+<div class="container p-5">
+    <div class="row">
+
+        <div class="col-6 previous d-flex justify-content-end">
+            <h1 class="mr-5" *ngIf="page>1 && !!users.length">
+                <a class="card-link" (click)="previous()">
+                    < </a>
+            </h1>
+        </div>
+
+        <div class="col-6 next d-flex justify-content-start">
+            <h1 class="ml-5" *ngIf="!((api.total_count/(page*8))==1) && users.length == 8">
+                <a class="card-link" (click)="next()"> 
+                    >
+                </a>
+            </h1>
+        </div>
+
+    </div>
+</div>
+<!-- previos and next -->

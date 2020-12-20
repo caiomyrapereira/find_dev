@@ -1,0 +1,13 @@
+.form {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    top: 170px;
+    /* número máximo é 9999 */
+}
+
+@media screen and (max-width:500px) {
+    .form input {
+        width: 100% !important;
+    }
+}
