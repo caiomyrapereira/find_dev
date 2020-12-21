@@ -4,7 +4,7 @@
     justify-content-lg-around
     justify-content-sm-around
     justify-content-md-around
-    justify-content-center">
+    justify-content-center" #customLoadingTemplate>
     <div class="card mb-5 border-0" style="width: 18rem;" *ngFor="let item of users">
         <div class="header p-3">
             <span class="font-weight-bold text-secondary"> {{item.name}} </span>
@@ -21,11 +21,12 @@
             </div>
         </div>
     </div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 </div>
 <!--users-->
 
 <!-- previos and next -->
-<div class="container p-5">
+<div class="container p-5" *ngIf="users.length === 8">
     <div class="row">
 
         <div class="col-6 previous d-flex justify-content-end">

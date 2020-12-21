@@ -13,6 +13,7 @@ export class FormComponent implements OnInit {
 
   public input: Input = new Input();
   public perPage: string = '8';
+  public loading = false;
 
 
   constructor(
@@ -25,9 +26,13 @@ export class FormComponent implements OnInit {
     setTimeout(() => {
       if (!!this.input.local && !!this.input.lang)
         this.router.navigate([`/home/${this.input.lang}/${this.input.local}/1`]);
-      else
+      else {
         this.alert.showAlertDanger('Preencher todos os campos');
+      }
     }, 100)
+  }
+  public showAlert() {
+    this.loading = false;
   }
 
   ngOnInit(): void {

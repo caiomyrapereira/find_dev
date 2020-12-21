@@ -1,6 +1,7 @@
 <main class="pb-5">
     <app-form></app-form>
     <router-outlet></router-outlet>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 </main>
 
 <app-footer></app-footer>

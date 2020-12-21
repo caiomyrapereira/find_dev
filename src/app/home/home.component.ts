@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   public page: number;
   public local: string;
   public arr: any;
+  public loading = false;
 
   constructor(
     private auth: AuthService,
@@ -50,25 +51,38 @@ export class HomeComponent implements OnInit {
     this.lang = this.route.snapshot.params["lang"];
     this.local = this.route.snapshot.params["local"];
     this.page = this.route.snapshot.params["id"];
+    window.scroll(0, 0);
+
+
     console.log('ok');
     this.auth.getUsers(this.local, this.lang, this.page, 8).subscribe((resp: Api) => {
+      this.loading = true;
       this.api = resp;
+      if(!this.api.items.length){
+        this.alert.showAlertDanger("Pesquisa não encontrada")
+        this.loading = false;
+      }
+
     }, (error: HttpErrorResponse) => {
       if (error.status === 403)
         this.alert.showAlertDanger("Acesso esgotado!")
+      this.loading = false;
     })
 
     setTimeout(() => {
       let cont = 0;
-      this.api.items.forEach((item) => {
+      this.api.items.forEach((item, index) => {
         setTimeout(() => {
           this.userService.getUsers(item).subscribe((resp: User) => {
             this.users.push(resp);
             console.log(this.users);
+            this.loading = false;
           }, (error: HttpErrorResponse) => {
             cont++;
             if (error.status === 403 && cont === 1)
               this.alert.showAlertDanger("Acesso negado!")
+            this.loading = false;
+
           })
         }, 800)
       })
